@@ -1,0 +1,3 @@
+﻿  UsuwanieMinZKopca.cpp
+C:\Users\pietr\Desktop\AlgorytmyProjekt\Mielcarowa wersja\UsuwanieMinZKopca\UsuwanieMinZKopca.cpp(123,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+  UsuwanieMinZKopca.vcxproj -> C:\Users\pietr\Desktop\AlgorytmyProjekt\Mielcarowa wersja\UsuwanieMinZKopca\Debug\UsuwanieMinZKopca.exe

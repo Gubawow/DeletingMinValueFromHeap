@@ -1,0 +1,8 @@
+﻿  Final.cpp
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(116,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(119,12): warning C4309: "=": obcięcie stałej wartości
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(119,24): warning C4309: "=": obcięcie stałej wartości
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(120,12): warning C4309: "=": obcięcie stałej wartości
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(120,24): warning C4309: "=": obcięcie stałej wartości
+C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Final.cpp(121,12): warning C4309: "=": obcięcie stałej wartości
+  Final.vcxproj -> C:\Users\pietr\Desktop\AlgorytmyProjekt\FinalAlboZgon\Final\Debug\Final.exe
