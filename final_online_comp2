@@ -1,0 +1,182 @@
+#include <iostream>
+#include <string>
+#include <time.h>
+
+using namespace std;
+
+string a, b, c;
+
+void
+kopiec1 (int arr[], int n, int i)
+{
+  int najwiekszy = i;		// korzen
+  int l = 2 * i + 1;		// lewy = 2*i + 1
+  int r = 2 * i + 2;		// prawy = 2*i + 2
+
+  // if lewy > najwiekszy
+  if (l < n && arr[l] > arr[najwiekszy])
+    najwiekszy = l;
+
+  // if prawy > najwiekszy
+  if (r < n && arr[r] > arr[najwiekszy])
+    najwiekszy = r;
+
+  // if najwiekszy nie jest korzeniem
+  if (najwiekszy != i)
+    {
+      swap (arr[i], arr[najwiekszy]);
+
+      // rekurencja
+      kopiec1 (arr, n, najwiekszy);
+    }
+}
+
+// cout pierwszej tablicy
+void
+pokaz (int arr[], int n)
+{
+  cout << "\nKopiec: ";
+
+  for (int i = 0; i < n; ++i)
+    cout << arr[i] << " ";
+  cout << "\n\n";
+}
+
+void
+kopiec2 (int arr2[], int n, int i)
+{
+  int najwiekszy = i;		// Inicjalizacja korzenia
+  int l = 2 * i + 1;		// lewy sasiad
+  int r = 2 * i + 2;		// prawy sasiad
+
+  // if lewy > najwiekszy
+  if (l < n - 1 && arr2[l] > arr2[najwiekszy])
+    najwiekszy = l;
+
+  // if prawy > najwiekszy
+  if (r < n - 1 && arr2[r] > arr2[najwiekszy])
+    najwiekszy = r;
+
+  // if najwiekszy nie jest korzeniem
+  if (najwiekszy != i)
+    {
+      swap (arr2[i], arr2[najwiekszy]);
+
+      // rekurencja
+      kopiec2 (arr2, n, najwiekszy);
+    }
+}
+
+// kopiec => tablica
+void
+budowa (int arr[], int n)
+{
+  // indeks ostatniego liscia
+  int startIdx = (n / 2) - 1;
+
+  // kopcowanie od dolu do gory
+  for (int i = startIdx; i >= 0; i--)
+    {
+      kopiec1 (arr, n, i);
+    }
+}
+
+// szukanie najmniejszego elementu kopca
+int
+minHeap (int arr[], int n)
+{
+  int m = arr[0];
+  for (int i = 0; i < n; ++i)
+    {
+      if (m > arr[i])
+	{
+	  m = arr[i];
+	}
+    }
+  return m;
+}
+
+//zamiana najmniejszego elementu z najwiekszym
+void
+replaceMin (int arr[], int n, int minHeap)
+{
+  for (int i = 0; i < n; ++i)
+    {
+      if (minHeap == arr[i])
+	{
+	  swap (arr[0], arr[i]);
+	}
+    }
+}
+
+//algorytm usuwania korzenia z kopca
+void
+pop (int arr[], int arr2[], int n)
+{
+  int startIdx = ((n - 1) / 2) - 1;
+  swap (arr[0], arr[n - 1]);	//zamiana korzenia z ostatnim lisciem
+  for (int i = 0; i < n - 1; ++i)
+    {
+      arr2[i] = arr[i];		//usuniecie ostatniego liscia
+    }
+  for (int i = startIdx; i >= 0; i--)
+    {
+      kopiec2 (arr2, n, i);	//budowa nowego kopca
+    }
+}
+
+int
+main ()
+{
+
+  //clock_t tStart = clock();
+  int i, v, x;
+  int max_random;
+  cout << "Wprowadz rozmiar tablicy: ";
+  cin >> x;
+  cout << "Wprowadz jaka moze byc najwieksza wartosc wygenerowana losowo w tablicy: ";
+  cin >> max_random;
+  int arr[x];
+  int arr2[x - 1];
+
+  cout << "Oto losowe " << x <<  " elementow tablicy: ";
+  srand (time (NULL));
+  for (i = 0; i < x; i++)
+    {
+      v = rand () % max_random;
+      cout << v << " ";
+      arr[i] = v;
+    }
+  cout << endl;
+
+  int n = sizeof (arr) / sizeof (arr[0]);
+
+  budowa (arr, n);
+
+  pokaz (arr, n);		//tablica po zamianie w kopiec
+
+  cout << "Najmniejsza wartosc kopca: " << minHeap (arr, n) << endl << endl;
+
+  replaceMin (arr, n, minHeap (arr, n));
+  //tablica po wstawieniu najmniejszego elementu do korzenia
+  cout << "Kopiec po zamianie korzenia z najmniejsza wartoscia kopca: " <<
+    endl;
+  for (int i = 0; i < x; ++i)
+    {
+      cout << arr[i] << " ";
+    }
+  cout << endl << endl;
+
+  pop (arr, arr2, n);
+  //finalny kopiec
+  cout << "Kopiec po usunieciu najmniejszego elementu w korzeniu: " << endl;
+  for (int i = 0; i < x - 1; ++i)
+    {
+      cout << arr2[i] << " ";
+    }
+  cout << endl;
+  //cout << "\n Wykonanie programu zajelo: " << ((double)(clock()-tStart)/CLOCKS_PER_SEC);
+
+
+  return 0;
+}
